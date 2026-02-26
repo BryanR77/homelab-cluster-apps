@@ -8,7 +8,7 @@ spec:
   sources:
     - repoURL: https://github.com/BryanR77/home-media-server.git
       targetRevision: generic-k8s
-      path: .
+      path: chart
       helm:
         valueFiles:
           - $values/values.yaml
