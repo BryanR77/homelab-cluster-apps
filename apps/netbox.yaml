@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: oci://ghcr.io/netbox-community/netbox-chart
+    - repoURL: https://charts.netbox.oss.netboxlabs.com/
       chart: netbox
       targetRevision: 8.0.6
       helm:
