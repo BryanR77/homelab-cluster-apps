@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netbox
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: oci://ghcr.io/netbox-community/netbox-chart
+      chart: netbox
+      targetRevision: 8.0.6
+      helm:
+        valueFiles:
+          - $values/values.yaml
+    - repoURL: https://github.com/BryanR77/netbox-values.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: netbox
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
