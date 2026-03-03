@@ -12,10 +12,10 @@ spec:
       helm:
         valueFiles:
           - $values/open-webui/values.yaml
-    - repoURL: https://github.com/BryanR77/ollama-values.git
+    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
       targetRevision: HEAD
       ref: values
-    - repoURL: https://github.com/BryanR77/ollama-values.git
+    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
       targetRevision: HEAD
       path: open-webui/manifests
   destination:

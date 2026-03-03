@@ -11,8 +11,8 @@ spec:
       targetRevision: 8.0.6
       helm:
         valueFiles:
-          - $values/values.yaml
-    - repoURL: https://github.com/BryanR77/netbox-values.git
+          - $values/netbox/values.yaml
+    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
       targetRevision: HEAD
       ref: values
   destination:
