@@ -6,14 +6,14 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://otwld.github.io/ollama-helm/
-      chart: ollama
+    - repoURL: https://helm.otwld.com/
+      chart: otwld/ollama
       targetRevision: 1.48.0
       helm:
         valueFiles:
           - $values/values.yaml
     - repoURL: https://github.com/BryanR77/ollama-values.git
-      targetRevision: HEAD
+      targetRevision: main
       ref: values
   destination:
     server: https://kubernetes.default.svc
