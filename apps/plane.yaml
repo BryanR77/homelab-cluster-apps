@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plane
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.plane.so/
+      chart: plane-ce
+      targetRevision: 1.4.1
+      helm:
+        valueFiles:
+          - $values/plane/values.yaml
+    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
+      targetRevision: HEAD
+      path: plane/manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: plane
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
