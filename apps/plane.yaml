@@ -15,9 +15,6 @@ spec:
     - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
       targetRevision: HEAD
       ref: values
-    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
-      targetRevision: HEAD
-      path: plane/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: plane
