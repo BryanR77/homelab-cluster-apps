@@ -15,6 +15,9 @@ spec:
     - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
       targetRevision: main
       ref: values
+    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
+      targetRevision: main
+      path: ollama/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: ollama
