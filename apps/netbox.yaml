@@ -8,7 +8,7 @@ spec:
   sources:
     - repoURL: https://charts.netbox.oss.netboxlabs.com/
       chart: netbox
-      targetRevision: 8.0.6
+      targetRevision: 8.0.9
       helm:
         valueFiles:
           - $values/netbox/values.yaml
