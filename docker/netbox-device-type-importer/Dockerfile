@@ -15,8 +15,9 @@ RUN git clone --depth 1 -b develop \
 RUN pip install --no-cache-dir -r /importer/requirements.txt "pynetbox>=7.3.4"
 
 # Run as non-root
-# /importer/repo is the hardcoded clone target in settings.py — appuser needs write access
-RUN useradd -u 1000 -m appuser && mkdir -p /importer/repo && chown appuser:appuser /importer/repo
+# appuser needs write access to /importer so it can create /importer/repo at runtime
+# (hardcoded clone target in settings.py)
+RUN useradd -u 1000 -m appuser && chown appuser:appuser /importer
 USER appuser
 
 WORKDIR /tmp
