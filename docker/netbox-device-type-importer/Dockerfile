@@ -1,7 +1,8 @@
 FROM python:3.13-slim
 
 # Install git at build time (no capability restrictions during image build)
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# apt-get upgrade ensures any available security patches are applied on top of the base image
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
         git ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -14,7 +15,8 @@ RUN git clone --depth 1 -b develop \
 RUN pip install --no-cache-dir -r /importer/requirements.txt "pynetbox>=7.3.4"
 
 # Run as non-root
-RUN useradd -u 1000 -m appuser
+# /importer/repo is the hardcoded clone target in settings.py — appuser needs write access
+RUN useradd -u 1000 -m appuser && mkdir -p /importer/repo && chown appuser:appuser /importer/repo
 USER appuser
 
 WORKDIR /tmp
