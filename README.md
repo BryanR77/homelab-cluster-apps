@@ -10,7 +10,8 @@ homelab-cluster-apps/
 │   ├── home-media-server.yaml
 │   ├── netbox.yaml
 │   ├── ollama.yaml
-│   └── open-webui.yaml
+│   ├── open-webui.yaml
+│   └── patchmon.yaml
 ├── bootstrap/
 │   └── root-app.yaml              # One-time bootstrap manifest
 └── renovate.json                  # Renovate config for chart version updates
@@ -34,6 +35,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 | netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | `8.0.6` | [netbox-values](https://github.com/BryanR77/netbox-values) | `netbox` |
 | ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | `1.48.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
 | open-webui | [open-webui](https://helm.openwebui.com/) | `12.5.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
+| patchmon | [patchmon-helm](https://hellstromit.github.io/patchmon-helm) | `0.3.2` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `patchmon` |
 
 ## Networking
 
@@ -42,6 +44,7 @@ Services are exposed via **Cilium Gateway API** (`homelab-gateway`, namespace: `
 | App | Hostname |
 |-----|----------|
 | open-webui | `ollama.homelab.rawlinsnet.net` |
+| patchmon | `patchmon.homelab.rawlinsnet.net`, `patchmon.rawlinsnet.net` (public, via Cloudflare Tunnel) |
 
 ## Adding a New App
 

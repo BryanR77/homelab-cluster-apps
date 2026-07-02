@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: patchmon
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://hellstromit.github.io/patchmon-helm
+      chart: patchmon
+      targetRevision: 0.3.2
+      helm:
+        valueFiles:
+          - $values/patchmon/values.yaml
+    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: patchmon
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
