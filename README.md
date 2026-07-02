@@ -8,6 +8,7 @@ ArgoCD App of Apps repository for my homelab Kubernetes cluster. This repo is th
 homelab-cluster-apps/
 ├── apps/                          # ArgoCD Application manifests
 │   ├── home-media-server.yaml
+│   ├── homepage.yaml
 │   ├── netbox.yaml
 │   ├── ollama.yaml
 │   ├── open-webui.yaml
@@ -32,6 +33,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 | App | Source | Version / Branch | Values Repo | Namespace |
 |-----|--------|-----------------|-------------|-----------|
 | home-media-server | [home-media-server](https://github.com/BryanR77/home-media-server) | `generic-k8s` | [home-media-server-values](https://github.com/BryanR77/home-media-server-values) | `home-media-server` |
+| homepage | [jameswynn/helm-charts](http://jameswynn.github.io/helm-charts/) | `2.1.0` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `homepage` |
 | netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | `8.0.6` | [netbox-values](https://github.com/BryanR77/netbox-values) | `netbox` |
 | ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | `1.48.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
 | open-webui | [open-webui](https://helm.openwebui.com/) | `12.5.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
@@ -43,6 +45,7 @@ Services are exposed via **Cilium Gateway API** (`homelab-gateway`, namespace: `
 
 | App | Hostname |
 |-----|----------|
+| homepage | `homepage.homelab.rawlinsnet.net` |
 | open-webui | `ollama.homelab.rawlinsnet.net` |
 | patchmon | `patchmon.homelab.rawlinsnet.net`, `patchmon.rawlinsnet.net` (public, via Cloudflare Tunnel) |
 
