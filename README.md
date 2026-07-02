@@ -35,7 +35,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 | netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | `8.0.6` | [netbox-values](https://github.com/BryanR77/netbox-values) | `netbox` |
 | ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | `1.48.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
 | open-webui | [open-webui](https://helm.openwebui.com/) | `12.5.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
-| patchmon | [patchmon-helm](https://hellstromit.github.io/patchmon-helm) | `0.3.2` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `patchmon` |
+| patchmon | [patchmon-helm](https://github.com/BryanR77/patchmon-helm) (fork of [HellstromIT/patchmon-helm](https://github.com/HellstromIT/patchmon-helm)) | `main` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `patchmon` |
 
 ## Networking
 

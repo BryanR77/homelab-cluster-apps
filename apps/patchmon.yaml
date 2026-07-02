@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://hellstromit.github.io/patchmon-helm
-      chart: patchmon
-      targetRevision: 0.3.2
+    - repoURL: https://github.com/BryanR77/patchmon-helm.git
+      targetRevision: main
+      path: charts/patchmon
       helm:
         valueFiles:
           - $values/patchmon/values.yaml
