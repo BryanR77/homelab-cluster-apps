@@ -27,9 +27,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-  ignoreDifferences:
-    - group: batch
-      kind: Job
-      name: plane-api-migrate-1
-      jqPathExpressions:
-        - .spec.template
