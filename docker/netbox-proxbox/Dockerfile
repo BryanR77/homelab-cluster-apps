@@ -7,4 +7,8 @@
 ARG NETBOX_VERSION=v4.6.5
 FROM ghcr.io/netbox-community/netbox:${NETBOX_VERSION}
 
-RUN /opt/netbox/venv/bin/pip install --no-cache-dir netbox-proxbox
+# The base image's venv is created with `uv venv` (no --seed), so it has no pip
+# binary at all. Use uv itself (same tool the base image is built with) to
+# install into that venv instead.
+COPY --from=ghcr.io/astral-sh/uv:0.11 /uv /usr/local/bin/uv
+RUN uv pip install --python /opt/netbox/venv/bin/python --no-cache netbox-proxbox
