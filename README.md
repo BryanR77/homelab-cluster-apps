@@ -34,7 +34,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 |-----|--------|-----------------|-------------|-----------|
 | home-media-server | [home-media-server](https://github.com/BryanR77/home-media-server) | `generic-k8s` | [home-media-server-values](https://github.com/BryanR77/home-media-server-values) | `home-media-server` |
 | homepage | [jameswynn/helm-charts](http://jameswynn.github.io/helm-charts/) | `2.1.0` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `homepage` |
-| netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | `8.0.6` | [netbox-values](https://github.com/BryanR77/netbox-values) | `netbox` |
+| netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | `8.0.6` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `netbox` |
 | ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | `1.48.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
 | open-webui | [open-webui](https://helm.openwebui.com/) | `12.5.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
 | patchmon | [patchmon-helm](https://github.com/BryanR77/patchmon-helm) (fork of [HellstromIT/patchmon-helm](https://github.com/HellstromIT/patchmon-helm)) | `main` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `patchmon` |
@@ -68,6 +68,8 @@ sources:
     targetRevision: HEAD
     ref: values
 ```
+
+For NetBox specifically, plugin installation and `PLUGINS` configuration live in the external NetBox values repo. That is where `netbox-proxbox` needs to be added.
 
 For apps that also need raw manifests deployed alongside the chart (e.g. Gateway API HTTPRoutes), add a third source pointing to a directory in the values repo:
 
