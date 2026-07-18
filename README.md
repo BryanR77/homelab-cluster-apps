@@ -69,7 +69,7 @@ sources:
     ref: values
 ```
 
-For NetBox specifically, plugin installation and `PLUGINS` configuration live in the external NetBox values repo. That is where `netbox-proxbox` needs to be added.
+For NetBox specifically, plugin installation and `plugins`/`pluginsConfig` values live in the external NetBox values repo. The [netbox-proxbox](https://github.com/emersonfelipesp/netbox-proxbox) plugin is enabled there: NetBox runs a custom image (built from [docker/netbox-proxbox/Dockerfile](docker/netbox-proxbox/Dockerfile) via [.github/workflows/netbox-proxbox-image.yml](.github/workflows/netbox-proxbox-image.yml)) with the plugin pip-installed, and its `proxbox-api` backend is deployed alongside NetBox via `netbox/manifests/proxbox-api.yaml` in the values repo. Connect it to Proxmox from the NetBox UI under Plugins > Proxbox.
 
 For apps that also need raw manifests deployed alongside the chart (e.g. Gateway API HTTPRoutes), add a third source pointing to a directory in the values repo:
 
