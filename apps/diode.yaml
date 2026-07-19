@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: diode
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://netboxlabs.github.io/diode/charts
+      chart: diode
+      targetRevision: 1.14.0
+      helm:
+        valueFiles:
+          - $values/diode/values.yaml
+    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
+      targetRevision: HEAD
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: diode
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

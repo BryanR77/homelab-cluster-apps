@@ -7,6 +7,7 @@ ArgoCD App of Apps repository for my homelab Kubernetes cluster. This repo is th
 ```
 homelab-cluster-apps/
 ├── apps/                          # ArgoCD Application manifests
+│   ├── diode.yaml
 │   ├── home-media-server.yaml
 │   ├── homepage.yaml
 │   ├── netbox.yaml
@@ -32,6 +33,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 
 | App | Source | Version / Branch | Values Repo | Namespace |
 |-----|--------|-----------------|-------------|-----------|
+| diode | [diode](https://netboxlabs.github.io/diode/charts) | `1.14.0` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `diode` |
 | home-media-server | [home-media-server](https://github.com/BryanR77/home-media-server) | `generic-k8s` | [home-media-server-values](https://github.com/BryanR77/home-media-server-values) | `home-media-server` |
 | homepage | [jameswynn/helm-charts](http://jameswynn.github.io/helm-charts/) | `2.1.0` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `homepage` |
 | netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | `8.0.6` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `netbox` |
@@ -70,6 +72,8 @@ sources:
 ```
 
 For NetBox specifically, plugin installation and `plugins`/`pluginsConfig` values live in the external NetBox values repo. The [netbox-proxbox](https://github.com/emersonfelipesp/netbox-proxbox) plugin is enabled there: NetBox runs a custom image (built from [docker/netbox-proxbox/Dockerfile](docker/netbox-proxbox/Dockerfile) via [.github/workflows/netbox-proxbox-image.yml](.github/workflows/netbox-proxbox-image.yml)) with the plugin pip-installed, and its `proxbox-api` backend is deployed alongside NetBox via `netbox/manifests/proxbox-api.yaml` in the values repo. Connect it to Proxmox from the NetBox UI under Plugins > Proxbox.
+
+The same custom image also bakes in the [netbox-diode-plugin](https://github.com/netboxlabs/diode-netbox-plugin), which talks to a [Diode](https://github.com/netboxlabs/diode) server deployed separately as its own app (`apps/diode.yaml`, values in `diode/values.yaml` of the values repo). Diode is internal-only (no ingress) — only NetBox reaches it, via `diode_target_override` in the `netbox_diode_plugin` PLUGINS_CONFIG. That config, plus all of Diode's own secrets (bundled Postgres/Redis/Hydra passwords and OAuth2 client credentials), are created imperatively with `kubectl create secret` rather than committed to git — see the chart's [step-by-step install docs](https://github.com/netboxlabs/diode/tree/develop/charts/diode#step-by-step-installation) for the exact secrets required in the `diode` and `netbox` namespaces.
 
 For apps that also need raw manifests deployed alongside the chart (e.g. Gateway API HTTPRoutes), add a third source pointing to a directory in the values repo:
 
