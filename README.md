@@ -13,6 +13,7 @@ homelab-cluster-apps/
 │   ├── netbox.yaml
 │   ├── ollama.yaml
 │   ├── open-webui.yaml
+│   ├── orb-agent.yaml
 │   └── patchmon.yaml
 ├── bootstrap/
 │   └── root-app.yaml              # One-time bootstrap manifest
@@ -39,6 +40,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 | netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | `8.0.6` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `netbox` |
 | ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | `1.48.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
 | open-webui | [open-webui](https://helm.openwebui.com/) | `12.5.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
+| orb-agent | [orb-agent](https://github.com/netboxlabs/orb-agent) (raw manifests, no chart) | `latest` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `orb-agent` |
 | patchmon | [patchmon-helm](https://github.com/BryanR77/patchmon-helm) (fork of [HellstromIT/patchmon-helm](https://github.com/HellstromIT/patchmon-helm)) | `main` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `patchmon` |
 
 ## Networking
@@ -73,7 +75,9 @@ sources:
 
 For NetBox specifically, plugin installation and `plugins`/`pluginsConfig` values live in the external NetBox values repo. The [netbox-proxbox](https://github.com/emersonfelipesp/netbox-proxbox) plugin is enabled there: NetBox runs a custom image (built from [docker/netbox-proxbox/Dockerfile](docker/netbox-proxbox/Dockerfile) via [.github/workflows/netbox-proxbox-image.yml](.github/workflows/netbox-proxbox-image.yml)) with the plugin pip-installed, and its `proxbox-api` backend is deployed alongside NetBox via `netbox/manifests/proxbox-api.yaml` in the values repo. Connect it to Proxmox from the NetBox UI under Plugins > Proxbox.
 
-The same custom image also bakes in the [netbox-diode-plugin](https://github.com/netboxlabs/diode-netbox-plugin), which talks to a [Diode](https://github.com/netboxlabs/diode) server deployed separately as its own app (`apps/diode.yaml`, values in `diode/values.yaml` of the values repo). Diode is internal-only (no ingress) — only NetBox reaches it, via `diode_target_override` in the `netbox_diode_plugin` PLUGINS_CONFIG. That config, plus all of Diode's own secrets (bundled Postgres/Redis/Hydra passwords and OAuth2 client credentials), are created imperatively with `kubectl create secret` rather than committed to git — see the chart's [step-by-step install docs](https://github.com/netboxlabs/diode/tree/develop/charts/diode#step-by-step-installation) for the exact secrets required in the `diode` and `netbox` namespaces.
+The same custom image also bakes in the [netbox-diode-plugin](https://github.com/netboxlabs/diode-netbox-plugin), which talks to a [Diode](https://github.com/netboxlabs/diode) server deployed separately as its own app (`apps/diode.yaml`, values in `diode/values.yaml` of the values repo). Diode is internal-only — nothing outside the cluster can reach it — but it still needs the chart's bundled ingress-nginx (pinned to `ClusterIP`, not the chart default `LoadBalancer`) as an internal reverse proxy: the plugin derives its Diode Auth REST URL from `diode_target` (grpc scheme swapped for http, `/auth` appended), which only resolves correctly through that combined ingress routing to `diode-auth`/`diode-ingester`/`diode-reconciler`. Pointing `diode_target` straight at any one backend service does not work. That config (`diode_target`, `netbox_to_diode_client_secret`), plus all of Diode's own secrets (bundled Postgres/Redis/Hydra passwords and OAuth2 client credentials), are created imperatively with `kubectl create secret` rather than committed to git — see the chart's [step-by-step install docs](https://github.com/netboxlabs/diode/tree/develop/charts/diode#step-by-step-installation) for the exact secrets required in the `diode` and `netbox` namespaces.
+
+Actual network discovery (finding devices, not just ingesting pushed data) is a separate component: [orb-agent](https://github.com/netboxlabs/orb-agent) (`apps/orb-agent.yaml`, raw manifests in `orb-agent/manifests/` of the values repo, no Helm chart upstream). It runs an SNMPv2c discovery policy against the homelab LAN and pushes results into Diode the same way the NetBox UI's "Add Client Credential" feature does — via its own dedicated Diode client credential (scope `diode:ingest`), created once through Plugins > Diode > Client Credentials in NetBox. It runs with `hostNetwork: true` since it needs real reachability to the LAN subnet being scanned, which a normal cluster-networked pod wouldn't have. The Diode credentials and SNMP community string live in an imperatively-created `orb-agent-secrets` Secret (not committed) — see the comments in `deployment.yaml` for the exact command.
 
 For apps that also need raw manifests deployed alongside the chart (e.g. Gateway API HTTPRoutes), add a third source pointing to a directory in the values repo:
 
