@@ -9,6 +9,9 @@ spec:
     repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
     targetRevision: HEAD
     path: orb-agent/manifests
+    kustomize:
+      images:
+        - netboxlabs/orb-agent=netboxlabs/orb-agent:2.11.0
   destination:
     server: https://kubernetes.default.svc
     namespace: orb-agent

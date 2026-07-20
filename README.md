@@ -32,16 +32,18 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 
 ## Apps
 
-| App | Source | Version / Branch | Values Repo | Namespace |
-|-----|--------|-----------------|-------------|-----------|
-| diode | [diode](https://netboxlabs.github.io/diode/charts) | `1.14.0` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `diode` |
-| home-media-server | [home-media-server](https://github.com/BryanR77/home-media-server) | `generic-k8s` | [home-media-server-values](https://github.com/BryanR77/home-media-server-values) | `home-media-server` |
-| homepage | [jameswynn/helm-charts](http://jameswynn.github.io/helm-charts/) | `2.1.0` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `homepage` |
-| netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | `8.0.6` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `netbox` |
-| ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | `1.48.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
-| open-webui | [open-webui](https://helm.openwebui.com/) | `12.5.0` | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
-| orb-agent | [orb-agent](https://github.com/netboxlabs/orb-agent) (raw manifests, no chart) | `latest` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `orb-agent` |
-| patchmon | [patchmon-helm](https://github.com/BryanR77/patchmon-helm) (fork of [HellstromIT/patchmon-helm](https://github.com/HellstromIT/patchmon-helm)) | `main` | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `patchmon` |
+| App | Source | Values Repo | Namespace |
+|-----|--------|-------------|-----------|
+| diode | [diode](https://netboxlabs.github.io/diode/charts) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `diode` |
+| home-media-server | [home-media-server](https://github.com/BryanR77/home-media-server) | [home-media-server-values](https://github.com/BryanR77/home-media-server-values) | `home-media-server` |
+| homepage | [jameswynn/helm-charts](http://jameswynn.github.io/helm-charts/) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `homepage` |
+| netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `netbox` |
+| ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
+| open-webui | [open-webui](https://helm.openwebui.com/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
+| orb-agent | [orb-agent](https://github.com/netboxlabs/orb-agent) (raw manifests, no chart) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `orb-agent` |
+| patchmon | [patchmon-helm](https://github.com/BryanR77/patchmon-helm) (fork of [HellstromIT/patchmon-helm](https://github.com/HellstromIT/patchmon-helm)) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `patchmon` |
+
+Current versions are pinned via `targetRevision` in each `apps/*.yaml` manifest, kept up to date by Renovate — see [Chart Version Management](#chart-version-management).
 
 ## Networking
 
