@@ -10,6 +10,7 @@ homelab-cluster-apps/
 │   ├── diode.yaml
 │   ├── home-media-server.yaml
 │   ├── homepage.yaml
+│   ├── myspeed.yaml
 │   ├── netbox.yaml
 │   ├── ollama.yaml
 │   ├── open-webui.yaml
@@ -37,6 +38,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 | diode | [diode](https://netboxlabs.github.io/diode/charts) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `diode` |
 | home-media-server | [home-media-server](https://github.com/BryanR77/home-media-server) | [home-media-server-values](https://github.com/BryanR77/home-media-server-values) | `home-media-server` |
 | homepage | [jameswynn/helm-charts](http://jameswynn.github.io/helm-charts/) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `homepage` |
+| myspeed | [MySpeed](https://github.com/gnmyt/MySpeed) (raw manifests, no chart) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `myspeed` |
 | netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `netbox` |
 | ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
 | open-webui | [open-webui](https://helm.openwebui.com/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
@@ -52,6 +54,7 @@ Services are exposed via **Cilium Gateway API** (`homelab-gateway`, namespace: `
 | App | Hostname |
 |-----|----------|
 | homepage | `homepage.homelab.rawlinsnet.net` |
+| myspeed | `myspeed.homelab.rawlinsnet.net` |
 | open-webui | `ollama.homelab.rawlinsnet.net` |
 | patchmon | `patchmon.homelab.rawlinsnet.net`, `patchmon.rawlinsnet.net` (public, via Cloudflare Tunnel) |
 
