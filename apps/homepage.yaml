@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: http://jameswynn.github.io/helm-charts/
-      chart: homepage
-      targetRevision: 2.1.0
+    - repoURL: https://github.com/BryanR77/homelab-helm-charts.git
+      path: charts/homepage
+      targetRevision: HEAD
       helm:
         valueFiles:
           - $values/homepage/values.yaml

@@ -37,7 +37,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 |-----|--------|-------------|-----------|
 | diode | [diode](https://netboxlabs.github.io/diode/charts) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `diode` |
 | home-media-server | [home-media-server](https://github.com/BryanR77/home-media-server) | [home-media-server-values](https://github.com/BryanR77/home-media-server-values) | `home-media-server` |
-| homepage | [jameswynn/helm-charts](http://jameswynn.github.io/helm-charts/) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `homepage` |
+| homepage | [homelab-helm-charts](https://github.com/BryanR77/homelab-helm-charts) (charts/homepage, our own wrapper around bjw-s-labs common) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `homepage` |
 | myspeed | [MySpeed](https://github.com/gnmyt/MySpeed) (raw manifests, no chart) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `myspeed` |
 | netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `netbox` |
 | ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
