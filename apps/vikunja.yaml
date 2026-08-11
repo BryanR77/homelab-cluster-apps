@@ -1,26 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: plane
+  name: vikunja
   namespace: argocd
 spec:
   project: default
   sources:
-    - repoURL: https://helm.plane.so/
-      chart: plane-ce
-      targetRevision: 1.6.2
+    - repoURL: ghcr.io/go-vikunja/helm-chart
+      chart: vikunja
+      targetRevision: 2.0.2
       helm:
         valueFiles:
-          - $values/plane/values.yaml
+          - $values/vikunja/values.yaml
     - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
       targetRevision: HEAD
       ref: values
     - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
       targetRevision: HEAD
-      path: plane/manifests
+      path: vikunja/manifests
   destination:
     server: https://kubernetes.default.svc
-    namespace: plane
+    namespace: vikunja
   syncPolicy:
     automated:
       prune: true
