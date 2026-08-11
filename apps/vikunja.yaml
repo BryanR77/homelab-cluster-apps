@@ -8,7 +8,7 @@ spec:
   sources:
     - repoURL: ghcr.io/go-vikunja/helm-chart
       chart: vikunja
-      targetRevision: 2.0.2
+      targetRevision: v2.0.2
       helm:
         valueFiles:
           - $values/vikunja/values.yaml
