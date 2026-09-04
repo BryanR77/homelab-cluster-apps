@@ -8,7 +8,7 @@ spec:
   sources:
     - repoURL: https://netboxlabs.github.io/diode/charts
       chart: diode
-      targetRevision: 1.14.0
+      targetRevision: 1.15.3
       helm:
         valueFiles:
           - $values/diode/values.yaml
