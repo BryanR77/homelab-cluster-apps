@@ -15,7 +15,8 @@ homelab-cluster-apps/
 │   ├── ollama.yaml
 │   ├── open-webui.yaml
 │   ├── orb-agent.yaml
-│   └── patchmon.yaml
+│   ├── patchmon.yaml
+│   └── proxcenter.yaml
 ├── bootstrap/
 │   └── root-app.yaml              # One-time bootstrap manifest
 └── renovate.json                  # Renovate config for chart version updates
@@ -44,6 +45,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 | open-webui | [open-webui](https://helm.openwebui.com/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
 | orb-agent | [orb-agent](https://github.com/netboxlabs/orb-agent) (raw manifests, no chart) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `orb-agent` |
 | patchmon | [patchmon-helm](https://github.com/BryanR77/patchmon-helm) (fork of [HellstromIT/patchmon-helm](https://github.com/HellstromIT/patchmon-helm)) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `patchmon` |
+| proxcenter | [ProxCenter Community Edition](https://github.com/adminsyspro/proxcenter-ui) (raw manifests, no chart — frontend + bundled Postgres, same pattern as vymanager) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `proxcenter` |
 
 Current versions are pinned via `targetRevision` in each `apps/*.yaml` manifest, kept up to date by Renovate — see [Chart Version Management](#chart-version-management).
 
@@ -57,6 +59,7 @@ Services are exposed via **Cilium Gateway API** (`homelab-gateway`, namespace: `
 | myspeed | `myspeed.homelab.rawlinsnet.net` |
 | open-webui | `ollama.homelab.rawlinsnet.net` |
 | patchmon | `patchmon.homelab.rawlinsnet.net`, `patchmon.rawlinsnet.net` (public, via Cloudflare Tunnel) |
+| proxcenter | `proxcenter.homelab.rawlinsnet.net` |
 
 ## Adding a New App
 
