@@ -18,6 +18,7 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true
   ignoreDifferences:
     - group: ""
       kind: PersistentVolumeClaim
