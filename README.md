@@ -15,7 +15,6 @@ homelab-cluster-apps/
 │   ├── ollama.yaml
 │   ├── open-webui.yaml
 │   ├── orb-agent.yaml
-│   ├── paperclip.yaml
 │   ├── patchmon.yaml
 │   └── proxcenter.yaml
 ├── bootstrap/
@@ -45,7 +44,6 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 | ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
 | open-webui | [open-webui](https://helm.openwebui.com/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
 | orb-agent | [orb-agent](https://github.com/netboxlabs/orb-agent) (raw manifests, no chart) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `orb-agent` |
-| paperclip | [paperclip](https://github.com/paperclipai/paperclip) (raw manifests, no chart — self-built image, see below) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `paperclip` |
 | patchmon | [patchmon-helm](https://github.com/BryanR77/patchmon-helm) (fork of [HellstromIT/patchmon-helm](https://github.com/HellstromIT/patchmon-helm)) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `patchmon` |
 | proxcenter | [ProxCenter Community Edition](https://github.com/adminsyspro/proxcenter-ui) (raw manifests, no chart — frontend + bundled Postgres, same pattern as vymanager) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `proxcenter` |
 
@@ -60,7 +58,6 @@ Services are exposed via **Cilium Gateway API** (`homelab-gateway`, namespace: `
 | homepage | `homepage.homelab.rawlinsnet.net` |
 | myspeed | `myspeed.homelab.rawlinsnet.net` |
 | open-webui | `ollama.homelab.rawlinsnet.net` |
-| paperclip | `paperclip.homelab.rawlinsnet.net` |
 | patchmon | `patchmon.homelab.rawlinsnet.net`, `patchmon.rawlinsnet.net` (public, via Cloudflare Tunnel) |
 | proxcenter | `proxcenter.homelab.rawlinsnet.net` |
 
