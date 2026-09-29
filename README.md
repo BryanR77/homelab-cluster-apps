@@ -11,6 +11,7 @@ homelab-cluster-apps/
 │   ├── home-media-server.yaml
 │   ├── homepage.yaml
 │   ├── myspeed.yaml
+│   ├── n8n.yaml
 │   ├── netbox.yaml
 │   ├── ollama.yaml
 │   ├── open-webui.yaml
@@ -40,6 +41,7 @@ ArgoCD will then watch the `apps/` directory and automatically sync any Applicat
 | home-media-server | [home-media-server](https://github.com/BryanR77/home-media-server) | [home-media-server-values](https://github.com/BryanR77/home-media-server-values) | `home-media-server` |
 | homepage | [homelab-helm-charts](https://github.com/BryanR77/homelab-helm-charts) (charts/homepage, our own wrapper around bjw-s-labs common) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `homepage` |
 | myspeed | [MySpeed](https://github.com/gnmyt/MySpeed) (raw manifests, no chart) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `myspeed` |
+| n8n | [n8n](https://n8n.io) (raw manifests, no chart — app + bundled Postgres, same pattern as proxcenter) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `n8n` |
 | netbox | [netbox-chart](https://charts.netbox.oss.netboxlabs.com/) | [homelab-cluster-apps-values](https://github.com/BryanR77/homelab-cluster-apps-values) | `netbox` |
 | ollama | [ollama-helm](https://otwld.github.io/ollama-helm/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `ollama` |
 | open-webui | [open-webui](https://helm.openwebui.com/) | [ollama-values](https://github.com/BryanR77/ollama-values) | `open-webui` |
@@ -57,6 +59,7 @@ Services are exposed via **Cilium Gateway API** (`homelab-gateway`, namespace: `
 |-----|----------|
 | homepage | `homepage.homelab.rawlinsnet.net` |
 | myspeed | `myspeed.homelab.rawlinsnet.net` |
+| n8n | `n8n.homelab.rawlinsnet.net` |
 | open-webui | `ollama.homelab.rawlinsnet.net` |
 | patchmon | `patchmon.homelab.rawlinsnet.net`, `patchmon.rawlinsnet.net` (public, via Cloudflare Tunnel) |
 | proxcenter | `proxcenter.homelab.rawlinsnet.net` |
