@@ -21,6 +21,15 @@
       "matchStrings": [
         "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\s*UPSTREAM_REF:\\s*(?<currentValue>\\S+)"
       ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.github/workflows/sketchlab-image\\.yml$/"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) branch=(?<currentValue>\\S+)\\n\\s*UPSTREAM_REF:\\s*(?<currentDigest>[a-f0-9]{40})"
+      ]
     }
   ]
 }

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sketchlab
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
+    targetRevision: HEAD
+    path: sketchlab/manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sketchlab
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
