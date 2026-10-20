@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: akvorado
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
+    targetRevision: HEAD
+    path: akvorado/manifests
+    kustomize:
+      images:
+        - quay.io/akvorado/akvorado=quay.io/akvorado/akvorado:2026.10.0
+        - quay.io/akvorado/ipinfo-geoipupdate=quay.io/akvorado/ipinfo-geoipupdate:latest
+        - apache/kafka=apache/kafka:4.3.1
+        - clickhouse/clickhouse-server=clickhouse/clickhouse-server:26.8
+        - valkey/valkey=valkey/valkey:9.0
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: akvorado
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
