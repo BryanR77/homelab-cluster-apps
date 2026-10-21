@@ -15,7 +15,7 @@ spec:
         - quay.io/akvorado/ipinfo-geoipupdate=quay.io/akvorado/ipinfo-geoipupdate:latest
         - apache/kafka=apache/kafka:4.3.2
         - clickhouse/clickhouse-server=clickhouse/clickhouse-server:26.8
-        - valkey/valkey=valkey/valkey:9.0
+        - valkey/valkey=valkey/valkey:9.2
   destination:
     server: https://kubernetes.default.svc
     namespace: akvorado
