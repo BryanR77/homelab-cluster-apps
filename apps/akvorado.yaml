@@ -13,7 +13,7 @@ spec:
       images:
         - quay.io/akvorado/akvorado=quay.io/akvorado/akvorado:2026.10.0
         - quay.io/akvorado/ipinfo-geoipupdate=quay.io/akvorado/ipinfo-geoipupdate:latest
-        - apache/kafka=apache/kafka:4.3.2
+        - apache/kafka=apache/kafka:4.4.0
         - clickhouse/clickhouse-server=clickhouse/clickhouse-server:26.9
         - valkey/valkey=valkey/valkey:9.2
   destination:
