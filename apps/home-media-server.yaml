@@ -19,6 +19,11 @@ spec:
     server: https://kubernetes.default.svc
     namespace: home-media-server
   syncPolicy:
+    # Plex mounts the virtiofs media share on talos-worker5 via hostPath,
+    # which the cluster-default "baseline" Pod Security level forbids.
+    managedNamespaceMetadata:
+      labels:
+        pod-security.kubernetes.io/enforce: privileged
     automated:
       prune: false
       selfHeal: false
