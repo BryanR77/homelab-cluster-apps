@@ -17,3 +17,17 @@ COPY --from=ghcr.io/astral-sh/uv:0.11 /uv /usr/local/bin/uv
 RUN uv pip install --python /opt/netbox/venv/bin/python --no-cache \
     netbox-proxbox \
     netboxlabs-diode-netbox-plugin
+
+# The base image runs collectstatic at build time, before these plugins exist,
+# so their JS/CSS never reached /opt/netbox/netbox/static and NetBox served
+# 404s for them (proxbox's endpoint status badges spun forever and its
+# connection-approval panel never loaded). Collect again with the plugins
+# enabled, as netbox-docker documents for plugins with static files. The
+# temporary plugins.py is restored afterwards; at runtime the chart's own
+# config provides PLUGINS.
+RUN cp /etc/netbox/config/plugins.py /tmp/plugins.py.orig \
+ && printf 'PLUGINS = ["netbox_proxbox", "netbox_diode_plugin"]\n' > /etc/netbox/config/plugins.py \
+ && DEBUG=true SECRET_KEY="build-time-only-collectstatic-dummy-key-000000000000" \
+    /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input \
+ && mv /tmp/plugins.py.orig /etc/netbox/config/plugins.py \
+ && test -f /opt/netbox/netbox/static/netbox_proxbox/js/connection-authority.js
