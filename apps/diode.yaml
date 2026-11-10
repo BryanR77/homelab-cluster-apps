@@ -15,6 +15,11 @@ spec:
     - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
       targetRevision: HEAD
       ref: values
+    # diode-proxy: namespace-local nginx that replaces the chart's bundled
+    # ingress-nginx (routing + auth_request to diode-auth /introspect).
+    - repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
+      targetRevision: HEAD
+      path: diode/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: diode
