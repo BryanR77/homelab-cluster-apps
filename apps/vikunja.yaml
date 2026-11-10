@@ -4,7 +4,7 @@ metadata:
   name: vikunja
   namespace: argocd
 spec:
-  project: default
+  project: apps
   sources:
     - repoURL: ghcr.io/go-vikunja/helm-chart
       chart: vikunja

@@ -4,7 +4,7 @@ metadata:
   name: homepage
   namespace: argocd
 spec:
-  project: default
+  project: apps-privileged
   sources:
     - repoURL: https://github.com/BryanR77/homelab-helm-charts.git
       path: charts/homepage

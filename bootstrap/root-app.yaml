@@ -4,7 +4,7 @@ metadata:
   name: homelab-apps
   namespace: argocd
 spec:
-  project: default
+  project: infra
   source:
     repoURL: https://github.com/BryanR77/homelab-cluster-apps.git
     targetRevision: HEAD

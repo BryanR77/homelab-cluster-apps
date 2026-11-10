@@ -4,7 +4,7 @@ metadata:
   name: patchmon
   namespace: argocd
 spec:
-  project: default
+  project: apps
   sources:
     - repoURL: https://github.com/BryanR77/patchmon-helm.git
       targetRevision: main
