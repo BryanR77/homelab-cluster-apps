@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: recipesage
+  namespace: argocd
+spec:
+  project: apps
+  source:
+    repoURL: https://github.com/BryanR77/homelab-cluster-apps-values.git
+    targetRevision: HEAD
+    path: recipesage/manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: recipesage
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      jsonPointers:
+        - /spec/storageClassName
